@@ -45,15 +45,22 @@ def get_large_audio_transcription(path):
   
 # main
 def main():
-  # creates a speech recognition object
-  r = sr.Recognizer()
-
+  # creates a speech recognition object to read from an audio file
+  recognitionFile = sr.Recognizer()
+  # file name
+  path = "samples_whatstheweatherlike.wav"
+  # prints recognized text
+  print("\nFull text from input audio file:", get_large_audio_transcription(path))
+    
+  # creates a speech recognition object to read from a microphone
+  recognitionMicrophone = sr.Recognizer()
+    
   # reads source audio from the microphone
   with sr.Microphone() as source:
-    audio_data = r.record(source, duration=5)
+    audio_data = recognitionMicrophone.record(source, duration=5)
     print("Recognizing...")
     # converts speech to text
-    text = r.recognize_google(audio_data)
+    text = recognitionMicrophone.recognize_google(audio_data)
     # prints recognized text
     print(text)
 
